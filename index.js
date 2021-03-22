@@ -10,7 +10,7 @@ for (let elem of cityElems) {
   elem.onclick = () => display(elem.innerHTML);
 }
 calcoloMedia.onclick = () => media();
-// esegue un callback con i dati di una citta'
+// Promette i risultati di un callback applicato ai dati di una citta'
 async function doCity(city, callback) {
   let response = await fetch(API_URL + "&q=" + city);
   if (response.ok) {
@@ -34,7 +34,6 @@ async function fetchTempForCity(cityElem) {
 async function media() {
   let media = 0;
   let temps = await Promise.all(cityElems.map(fetchTempForCity));
-  // temps e' l'array dei risultati di tutte le Promise
   media = temps.reduce((media, data) => data + media) / temps.length;
   document.getElementById("media").innerHTML =
     "La temperatura media e' di " + media + " gradi";
